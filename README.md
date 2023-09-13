@@ -3,21 +3,19 @@
 ## :hammer: Install pak
 
 ``` r
-install.packages(paletteer)
+install.packages("paletteer")
+install.packages("pals")
 ```
 
+## Calling colors
+
 ``` r
-#Calling colors
 library(paletteer)
-```
-
-    ## Warning: 程辑包'paletteer'是用R版本4.2.3 来建造的
-
-``` r
 library(tidyr)
-load("sysdata.rda")
+library(pals)
+load("sysdata.rda") #download from this Git rep
 
-color_filter <- function(names = d_names, min = 15, max = 50){ #min:Minimum color number 
+color_filter <- function(names = d_names, min = 15, max = 50){ 
     
     leng_ma <- lapply(names, function(i) {
         length(paletteer_d(i))
@@ -33,8 +31,16 @@ color_filter <- function(names = d_names, min = 15, max = 50){ #min:Minimum colo
 }
 ```
 
+## Get col
+
 ``` r
-color_5 <- color_filter(min = 5, max = 10)
+color_5 <- color_filter(min = 5, max = 10) #min:Minimum color number; max: Maximum color number
+do.call(pal.bands, color_5 %>% head)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
 head(color_5)
 ```
 

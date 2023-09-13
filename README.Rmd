@@ -10,16 +10,19 @@ output:
 ##  :hammer: Install pak
 
 ```{r eval=FALSE}
-install.packages(paletteer)
+install.packages("paletteer")
+install.packages("pals")
 ```
 
-```{r color}
-#Calling colors
+##  Calling colors
+```{r message=FALSE, warning=FALSE}
+
 library(paletteer)
 library(tidyr)
-load("sysdata.rda")
+library(pals)
+load("sysdata.rda") #download from this Git rep
 
-color_filter <- function(names = d_names, min = 15, max = 50){ #min:Minimum color number 
+color_filter <- function(names = d_names, min = 15, max = 50){ 
     
     leng_ma <- lapply(names, function(i) {
         length(paletteer_d(i))
@@ -36,8 +39,10 @@ color_filter <- function(names = d_names, min = 15, max = 50){ #min:Minimum colo
 
 ```
 
-```{r call.color}
-color_5 <- color_filter(min = 5, max = 10)
+##  Get col 
+```{r }
+color_5 <- color_filter(min = 5, max = 10) #min:Minimum color number; max: Maximum color number
+do.call(pal.bands, color_5 %>% head)
 head(color_5)
 ```
 
