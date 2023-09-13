@@ -1,0 +1,44 @@
+---
+output: 
+  md_document:
+    variant: gfm
+---
+
+
+# Color palette
+
+##  :hammer: Install pak
+
+```{r eval=FALSE}
+install.packages(paletteer)
+```
+
+```{r color}
+#Calling colors
+library(paletteer)
+library(tidyr)
+load("sysdata.rda")
+
+color_filter <- function(names = d_names, min = 15, max = 50){ #min:Minimum color number 
+    
+    leng_ma <- lapply(names, function(i) {
+        length(paletteer_d(i))
+    }) %>% do.call(rbind, .)
+    
+    len_df <- as.data.frame(leng_ma) 
+    len_df$paletteer <- d_names 
+    paletterr_d_15 <- len_df[len_df[1] > min & len_df[1] < max,]
+    
+    color_15 <- lapply(paletterr_d_15$paletteer, function(i) paletteer_d(i) ) 
+    names(color_15) <- paletterr_d_15$paletteer 
+    return(color_15)
+}
+
+```
+
+```{r call.color}
+color_5 <- color_filter(min = 5, max = 10)
+head(color_5)
+```
+
+
